@@ -14,11 +14,13 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
+  *STEPS:
+  *******
+  *Connect the potentiometer to PA1 and run in debug mode and check in live
+  *expression to see the variable value changing.
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include<stdio.h>
-#include<string.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -47,8 +49,7 @@ ADC_HandleTypeDef hadc1;
 UART_HandleTypeDef huart4;
 
 /* USER CODE BEGIN PV */
-uint16_t lux = 0;
-char msg[20];
+uint16_t pot_val = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -109,10 +110,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  HAL_ADC_Start_IT(&hadc1);
 	  HAL_ADC_PollForConversion(&hadc1, 20);
-	  lux = HAL_ADC_GetValue(&hadc1);
-	  sprintf(msg,"Value: %hu \r\n",lux);
-	  HAL_UART_Transmit(&huart4, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
-	  HAL_Delay(200);
+	  pot_val = HAL_ADC_GetValue(&hadc1);
   }
   /* USER CODE END 3 */
 }
