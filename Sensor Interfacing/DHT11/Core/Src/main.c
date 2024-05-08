@@ -87,7 +87,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, SET);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -95,6 +95,24 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, RESET);
+	  HAL_Delay(18); //18MS
+	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, SET);
+	  HAL_Delay(40); //20-40US
+	  GPIOC->MODER &= ~GPIO_MODER_MODE3;
+	  if( (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)) == 0 ){
+		  HAL_Delay(80); //8US
+	  }
+	  if( (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)) == 1 ){
+	  		  HAL_Delay(80); //8US
+	  }
+	  if( (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3)) == 0 ){
+	  		  HAL_Delay(50); //8US
+	  }
+
+
+
+
 
     /* USER CODE BEGIN 3 */
   }
