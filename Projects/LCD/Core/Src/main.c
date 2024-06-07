@@ -62,8 +62,8 @@ void lcd_send_data(unsigned char data);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void lcd_init(void) {
-	lcd_send_command(0x02); // Initialize LCD in 4-bit mode
-	lcd_send_command(0x28); // 2 line, 5x7 matrix in 4-bit mode
+	//lcd_send_command(0x02); // Initialize LCD in 4-bit mode
+	//lcd_send_command(0x28); // 2 line, 5x7 matrix in 4-bit mode
 	lcd_send_command(CLEAR_SCREEN);
 	HAL_Delay(delay_t); // Wait for clear to complete
 	lcd_send_command(DISPLAY_CURSOR_ON);
@@ -181,9 +181,9 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	/* USER CODE BEGIN 2 */
-	char *name = "AMRITA VYSAKH";
+	char *name = "Hello World!";
 	lcd_init();
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; name[i] != '\0'; i++) {
 		lcd_send_data(*(name + i));
 		HAL_Delay(100);
 	}
